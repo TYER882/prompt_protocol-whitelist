@@ -1,24 +1,22 @@
 {
   "compilerOptions": {
     "target": "ES2020",
-    "useDefineForClassFields": true,
-    "lib": ["DOM", "DOM.Iterable", "ES2020"],
-    "allowJs": false,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
+    "lib": ["ES2020"],
     "module": "ESNext",
     "moduleResolution": "Bundler",
+
+    "strict": true,
+    "skipLibCheck": true,
+
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+
+    "noImplicitAny": false,
+    "types": ["node", "express"],
+
     "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react-jsx",
-    "paths": {
-      "@/*": ["./src/*"]
-    }
+    "isolatedModules": true
   },
-  "include": ["src", "server", "vite.config.ts", "tailwind.config.ts", "src/vite-env-override.d.ts", "api"],
-  "references": []
+  "include": ["src", "server", "api"],
+  "exclude": ["node_modules"]
 }

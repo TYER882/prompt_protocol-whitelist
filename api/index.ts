@@ -1,4 +1,4 @@
-import express, { Request, Response, NextFunction } from "express";
+import express from "express";
 import cors from "cors";
 import serverless from "serverless-http";
 
@@ -10,31 +10,20 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// 🔥 lazy DB connection (SAFE FOR SERVERLESS)
 let dbConnected = false;
 
-app.use(async (_req: Request, _res: Response, next: NextFunction) => {
+app.use(async (_req, _res, next) => {
   if (!dbConnected) {
-    try {
-      await connectDB();
-      dbConnected = true;
-    } catch (err) {
-      console.error("DB CONNECTION ERROR:", err);
-    }
+    await connectDB();
+    dbConnected = true;
   }
   next();
 });
 
-// health check
-app.get("/api/health", (_req: Request, res: Response) => {
-  return res.json({
-    success: true,
-    status: "online",
-  });
+app.get("/api/health", (_req, res) => {
+  return res.json({ ok: true });
 });
 
-// routes
 app.use("/api/whitelist", whitelistRouter);
 
-// ❗ IMPORTANT: convert express → serverless
 export default serverless(app);
