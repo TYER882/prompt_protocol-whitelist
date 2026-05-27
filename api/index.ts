@@ -1,4 +1,4 @@
-import express from "express";
+import express, { Request, Response } from "express";
 import cors from "cors";
 
 import { connectDB } from "../server/lib/db";
@@ -9,9 +9,18 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-await connectDB();
+// ✅ lazy connect (SAFE for Vercel)
+let dbConnected = false;
 
-app.get("/api/health", (_req, res) => {
+app.use(async (_req, _res, next) => {
+  if (!dbConnected) {
+    await connectDB();
+    dbConnected = true;
+  }
+  next();
+});
+
+app.get("/api/health", (_req: Request, res: Response) => {
   res.json({
     success: true,
     status: "online",
