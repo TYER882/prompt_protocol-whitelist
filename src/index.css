@@ -1,0 +1,206 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+:root {
+  color-scheme: dark;
+  --font-kdam: "Kdam Thmor Pro", "IBM Plex Mono", "Cascadia Code", "SFMono-Regular", Menlo, Consolas, monospace;
+  --font-geist-mono: "IBM Plex Mono", "Cascadia Code", "SFMono-Regular", Menlo, Consolas, monospace;
+  --bg: #00311f;
+  --panel: rgba(2, 12, 22, 0.78);
+  --border: rgba(3, 97, 66, 0.452);
+  --accent: #22ee99;
+  --accent-2: #a3e635;
+  --text: #e5f7ff;
+  --muted: #0a1311;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+ background:
+    radial-gradient(circle at 18% 12%, rgba(34, 211, 238, 0.12), transparent 26rem),
+    radial-gradient(circle at 86% 8%, rgba(163, 230, 53, 0.08), transparent 24rem),
+    linear-gradient(180deg, #020a12 0%, #020617 45%, #010409 100%);
+  color: var(--text);
+  font-family: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+::selection {
+  background: rgba(46, 250, 128, 0.22);
+  color: #ffffff;
+}
+body::selection {
+  background: rgba(18, 252, 162, 0.32);
+  color: #ffffff;
+}
+
+.matrix-grid {
+  background-image:
+    linear-gradient(rgba(34, 211, 238, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(34, 211, 238, 0.08) 1px, transparent 1px),
+    linear-gradient(rgba(163, 230, 53, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(163, 230, 53, 0.035) 1px, transparent 1px);
+  background-position:
+    -1px -1px,
+    -1px -1px,
+    -1px -1px,
+    -1px -1px;
+  background-size:
+    48px 48px,
+    48px 48px,
+    12px 12px,
+    12px 12px;
+  mask-image: linear-gradient(to bottom, black, black 72%, transparent);
+}
+
+.font-terminal-title {
+  font-family: var(--font-kdam);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.scanline {
+  position: relative;
+}
+
+.scanline::after {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  content: "";
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(229, 247, 255, 0.03),
+    rgba(229, 247, 255, 0.03) 1px,
+    transparent 1px,
+    transparent 5px
+  );
+  mix-blend-mode: screen;
+}
+
+.terminal-scroll::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.terminal-scroll::-webkit-scrollbar-track {
+  background: rgba(2, 6, 23, 0.75);
+}
+
+.terminal-scroll::-webkit-scrollbar-track {
+  background: rgba(2, 6, 23, 0.75);
+}
+
+.terminal-scroll::-webkit-scrollbar-thumb {
+  background: rgba(34, 211, 238, 0.35);
+  border-radius: 999px;
+}
+.terminal-cursor {
+  animation: terminal-cursor-blink 1s steps(2, start) infinite;
+  box-shadow: 0 0 14px rgba(34, 211, 238, 0.72);
+}
+
+
+.terminal-active {
+  animation: terminal-border-pulse 3.8s ease-in-out infinite;
+}
+
+.font-kdam {
+  font-family: var(--font-kdam);
+}
+
+.terminal-flicker {
+  animation: terminal-opacity-flicker 7s steps(1, end) infinite;
+}
+
+.terminal-text-shadow {
+  text-shadow: 0 0 18px rgba(57, 255, 136, 0.28);
+}
+.font-ibm {
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+.cyan-text-shadow {
+  text-shadow: 0 0 22px rgba(34, 211, 238, 0.45);
+}
+.terminal-cursor {
+  animation: terminal-cursor-blink 1s steps(2, start) infinite;
+  box-shadow: 0 0 14px rgba(34, 211, 238, 0.72);
+}
+
+.terminal-active {
+  animation: terminal-border-pulse 3.8s ease-in-out infinite;
+}
+
+.terminal-flicker {
+  animation: terminal-opacity-flicker 7s steps(1, end) infinite;
+}
+
+.noise-mask {
+  background-image: radial-gradient(rgba(34, 211, 238, 0.12) 1px, transparent 1px);
+  background-size: 18px 18px;
+}
+@keyframes terminal-cursor-blink {
+  0%,
+  45% {
+    opacity: 1;
+  }
+
+  46%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes terminal-border-pulse {
+  0%,
+  100% {
+    border-color: rgba(34, 211, 238, 0.18);
+    box-shadow: 0 0 16px rgba(34, 211, 238, 0.08);
+  }
+
+  50% {
+    border-color: rgba(34, 211, 238, 0.34);
+    box-shadow: 0 0 24px rgba(34, 211, 238, 0.16);
+  }
+}
+
+@keyframes terminal-opacity-flicker {
+  0%,
+  18%,
+  40%,
+  78%,
+  100% {
+    opacity: 1;
+  }
+
+  19% {
+    opacity: 0.985;
+  }
+
+  41% {
+    opacity: 0.975;
+  }
+
+  79% {
+    opacity: 0.99;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .terminal-cursor,
+  .terminal-active,
+  .terminal-flicker {
+    animation: none;
+  }
+}
