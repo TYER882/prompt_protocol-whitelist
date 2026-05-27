@@ -167,7 +167,7 @@ export function WhitelistForm({ form, setForm, onSubmitted }: WhitelistFormProps
         <span className="text-sm leading-relaxed text-slate-300">
           I followed{" "}
           <a
-            href="https://x.com/promptprotocolx"
+            href="https://x.com/terminal9x"
             target="_blank"
             rel="noreferrer"
             className="font-bold text-cyan-200 hover:text-green-300"

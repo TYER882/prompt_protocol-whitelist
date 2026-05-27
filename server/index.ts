@@ -4,7 +4,7 @@ import express from "express";
 import { connectDB } from "./lib/db";
 import whitelistRouter from "./routes/whitelist";
 
-dotenv.config({ path: "server/.env" });
+
 dotenv.config();
 
 const app = express();

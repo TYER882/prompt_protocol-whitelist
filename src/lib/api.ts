@@ -1,3 +1,5 @@
+
+//lib/api.ts
 export type WhitelistPayload = {
   email: string;
   walletAddress: string;
