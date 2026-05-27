@@ -1,8 +1,10 @@
+//server/routes/whitelist.ts
+
 import { Router } from "express";
 import rateLimit from "express-rate-limit";
 import { z } from "zod";
 import { WhitelistEntry } from "../models/WhitelistEntry";
-
+import { Request, Response } from "express";
 const router = Router();
 
 const emailSchema = z.string().email("Invalid email address.").transform((value) => value.trim().toLowerCase());
@@ -31,7 +33,7 @@ function maskWallet(walletAddress: string) {
   return `${walletAddress.slice(0, 6)}...${walletAddress.slice(-4)}`;
 }
 
-router.post("/", submitLimiter, async (req, res) => {
+router.post("/", submitLimiter, async (req: Request, res: Response) => {
   const parsed = whitelistSchema.safeParse(req.body);
 
   if (!parsed.success) {
@@ -74,12 +76,12 @@ router.post("/", submitLimiter, async (req, res) => {
   }
 });
 
-router.get("/count", async (_req, res) => {
+router.get("/count", async (_req: Request, res: Response) => {
   const count = await WhitelistEntry.countDocuments();
   return res.json({ success: true, count });
 });
 
-router.get("/recent", async (_req, res) => {
+router.get("/recent", async (_req: Request, res: Response)=> {
   const entries = await WhitelistEntry.find({}, { email: 0 })
     .sort({ createdAt: -1 })
     .limit(10)

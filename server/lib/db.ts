@@ -1,12 +1,11 @@
 import mongoose from "mongoose";
 
-const uri = process.env.MONGODB_URI!;
+const uri = process.env .MONGODB_URI as string;
 
 if (!uri) {
   throw new Error("MONGODB_URI is missing");
 }
 
-// 👇 type-safe global cache
 type MongooseCache = {
   conn: typeof mongoose | null;
   promise: Promise<typeof mongoose> | null;
@@ -32,7 +31,7 @@ export async function connectDB() {
     cached.promise = mongoose.connect(uri, {
       dbName: process.env.DB_NAME || "prompt",
       serverSelectionTimeoutMS: 10000,
-    });
+    } as any);
   }
 
   cached.conn = await cached.promise;
