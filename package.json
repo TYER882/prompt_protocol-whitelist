@@ -3,14 +3,14 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "build": "tsc --noEmit && vite build",
-    "preview": "vite preview",
-    "server": "tsx server/index.ts",
-    "pnpm run ": "tsx watch server/index.ts",
-    "dev:all": "concurrently \"npm run dev\" \"npm run dev:server\""
-  },
+"scripts": {
+  "dev": "vite",
+  "build": "tsc --noEmit && vite build",
+  "preview": "vite preview",
+  "server": "tsx server/index.ts",
+  "dev:server": "tsx watch server/index.ts",
+  "dev:all": "concurrently \"npm run dev\" \"npm run dev:server\""
+},
   "dependencies": {
     "@fontsource/kdam-thmor-pro": "^5.2.8",
     "@vitejs/plugin-react": "^4.3.4",

@@ -14,7 +14,7 @@ export type WhitelistResponse = {
   };
 };
 
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:4000";
+const API_URL = "";
 
 async function parseResponse<T>(response: Response): Promise<T> {
   const data = (await response.json().catch(() => ({}))) as T & { message?: string };
