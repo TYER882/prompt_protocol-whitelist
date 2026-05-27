@@ -19,6 +19,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["src", "server", "vite.config.ts", "tailwind.config.ts", "src/vite-env-override.d.ts"],
+  "include": ["src", "server", "vite.config.ts", "tailwind.config.ts", "src/vite-env-override.d.ts", "api"],
   "references": []
 }

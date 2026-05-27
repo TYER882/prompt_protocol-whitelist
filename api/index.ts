@@ -1,8 +1,8 @@
 import express from "express";
 import cors from "cors";
 
-import { connectDB } from "../../server/lib/db";
-import whitelistRouter from "../../server/routes/whitelist";
+import { connectDB } from "../server/lib/db";
+import whitelistRouter from "../server/routes/whitelist";
 
 const app = express();
 
