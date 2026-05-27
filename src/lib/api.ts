@@ -14,7 +14,9 @@ export type WhitelistResponse = {
   };
 };
 
-const API_URL = "";
+const API_URL =
+  import.meta.env.VITE_API_URL?.replace(/\/$/, "") ||
+  "";
 
 async function parseResponse<T>(response: Response): Promise<T> {
   const data = (await response.json().catch(() => ({}))) as T & { message?: string };

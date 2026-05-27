@@ -1,39 +1,20 @@
 import mongoose from "mongoose";
 
-const uri = process.env .MONGODB_URI as string;
-
-if (!uri) {
-  throw new Error("MONGODB_URI is missing");
-}
-
-type MongooseCache = {
-  conn: typeof mongoose | null;
-  promise: Promise<typeof mongoose> | null;
-};
-
-const globalAny = global as unknown as {
-  mongoose?: MongooseCache;
-};
-
-const cached: MongooseCache = globalAny.mongoose ?? {
-  conn: null,
-  promise: null,
-};
-
-globalAny.mongoose = cached;
+let cachedConnection: typeof mongoose | null = null;
 
 export async function connectDB() {
-  if (cached.conn) return cached.conn;
+  if (cachedConnection) return cachedConnection;
 
-  if (!cached.promise) {
-    mongoose.set("strictQuery", true);
-
-    cached.promise = mongoose.connect(uri, {
-      dbName: process.env.DB_NAME || "prompt",
-      serverSelectionTimeoutMS: 10000,
-    } as any);
+  const uri = process.env.MONGODB_URI;
+  if (!uri) {
+    throw new Error("MONGODB_URI is missing. Add it to server/.env or environment variables.");
   }
 
-  cached.conn = await cached.promise;
-  return cached.conn;
+  mongoose.set("strictQuery", true);
+  cachedConnection = await mongoose.connect(uri, {
+    dbName: process.env.DB_NAME || "prompt",
+    serverSelectionTimeoutMS: 10000,
+  });
+
+  return cachedConnection;
 }
