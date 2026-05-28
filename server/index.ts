@@ -8,15 +8,29 @@ import whitelistRouter from "./routes/whitelist";
 dotenv.config();
 
 const app = express();
+app.set("trust proxy", 1);
+
 const port = Number(process.env.PORT || 4000);
-const clientOrigin = process.env.CLIENT_ORIGIN || "http://localhost:3000";
+const allowedOrigins = [
+  "http://localhost:3000",
+  "https://prompt-protocol-whitelist.vercel.app",
+  "https://www.terminal9x.fun",
+];
 
 app.use(
   cors({
-    origin: clientOrigin,
+    origin(origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     methods: ["GET", "POST"],
+    credentials: true,
   })
 );
+
 app.use(express.json({ limit: "64kb" }));
 
 app.get("/api/health", (_req, res) => {
