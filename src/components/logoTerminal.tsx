@@ -1,5 +1,5 @@
 
-import LogoGif from "../assets/terminal.svg";
+import LogoGif from "../assets/Frame21-ezgif.com-crop.png";
 
 
 export default function LogoTerminal() {
