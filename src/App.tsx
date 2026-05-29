@@ -2,6 +2,8 @@ import { HeroTerminal } from "./components/HeroTerminal";
 import { MatrixBackground } from "./components/MatrixBackground";
 import { Navbar } from "./components/Navbar";
 import { Sidebar } from "./components/Sidebar";
+import { PublicMintNotice } from "./components/PublicMintNotice";
+import { MintAnnouncementBanner  } from "./components/MintAnnouncementBanner";
 
 function UtilityCard({
   title,
@@ -13,6 +15,7 @@ function UtilityCard({
   return (
     <div className="group relative overflow-hidden rounded-2xl border border-emerald-400/20 bg-terminal-bg p-5 transition hover:border-green-300/40 hover:bg-green-300/5">
       <div className="absolute right-4 top-4 h-1.5 w-1.5 rounded-full bg-green-300 shadow-[0_0_12px_rgba(57,255,136,0.9)]" />
+
 
       <p className="font-mono text-[10px] uppercase tracking-[0.32em] text-cyan-200/60">
         Utility
@@ -31,7 +34,7 @@ export default function App() {
   return (
     <main className="relative min-h-screen w-full overflow-x-hidden bg-protocol-bg text-slate-100">
       <MatrixBackground />
-
+ 
       <div className="relative z-10">
         <Navbar />
 
@@ -39,8 +42,9 @@ export default function App() {
           <Sidebar />
 
           <div className="min-w-0 space-y-10">
-            <HeroTerminal />
-
+            {/* <HeroTerminal /> */}
+            <MintAnnouncementBanner />
+            <PublicMintNotice />
             <section id="utility" className="space-y-5 pb-10 pt-4">
               <div>
                 <p className="font-mono text-xs uppercase tracking-[0.35em] text-green-300">
